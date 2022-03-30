@@ -4,7 +4,7 @@ use std::process::exit;
 
 use rusqlite::Connection;
 
-use crate::db::{db_init, add_employee, all_employees };
+use crate::db::{db_init, add_employee, all_employees, update_employee };
 use crate::employee::Employee;
 use crate::config::DB_PATH;
 
@@ -54,7 +54,7 @@ fn choice() {
     match choice_str.trim() {
       "1" => add_employee_handler(&conn),
       "2" => view_all_employees(&conn),
-      "3" => update_employee(),
+      "3" =>  update_employee_handler(&conn),
       "4" => delete_employee(),
       "5" => exit_app(),
       _ => println!("No number entered"),
@@ -135,7 +135,7 @@ fn display_employees(employees: Vec<Employee>) {
   }
 }
 
-fn update_employee() {
+fn update_employee_handler(conn: &Connection) {
    print!("{esc}c", esc = 27 as char);
 
   println!("UPDATE EMPLOYEE");
