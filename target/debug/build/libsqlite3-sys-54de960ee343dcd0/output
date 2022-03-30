@@ -1,0 +1,38 @@
+cargo:rerun-if-changed=sqlite3/sqlite3.c
+cargo:rerun-if-changed=sqlite3/wasm32-wasi-vfs.c
+cargo:rerun-if-env-changed=SQLITE_MAX_VARIABLE_NUMBER
+cargo:rerun-if-env-changed=SQLITE_MAX_EXPR_DEPTH
+cargo:rerun-if-env-changed=LIBSQLITE3_FLAGS
+TARGET = Some("x86_64-unknown-linux-gnu")
+OPT_LEVEL = Some("0")
+HOST = Some("x86_64-unknown-linux-gnu")
+CC_x86_64-unknown-linux-gnu = None
+CC_x86_64_unknown_linux_gnu = None
+HOST_CC = None
+CC = Some("gcc")
+CFLAGS_x86_64-unknown-linux-gnu = None
+CFLAGS_x86_64_unknown_linux_gnu = None
+HOST_CFLAGS = None
+CFLAGS = None
+CRATE_CC_NO_DEFAULTS = None
+DEBUG = Some("true")
+CARGO_CFG_TARGET_FEATURE = Some("fxsr,sse,sse2")
+running: "gcc" "-O0" "-ffunction-sections" "-fdata-sections" "-fPIC" "-g" "-fno-omit-frame-pointer" "-m64" "-DSQLITE_CORE" "-DSQLITE_DEFAULT_FOREIGN_KEYS=1" "-DSQLITE_ENABLE_API_ARMOR" "-DSQLITE_ENABLE_COLUMN_METADATA" "-DSQLITE_ENABLE_DBSTAT_VTAB" "-DSQLITE_ENABLE_FTS3" "-DSQLITE_ENABLE_FTS3_PARENTHESIS" "-DSQLITE_ENABLE_FTS5" "-DSQLITE_ENABLE_JSON1" "-DSQLITE_ENABLE_LOAD_EXTENSION=1" "-DSQLITE_ENABLE_MEMORY_MANAGEMENT" "-DSQLITE_ENABLE_RTREE" "-DSQLITE_ENABLE_STAT2" "-DSQLITE_ENABLE_STAT4" "-DSQLITE_SOUNDEX" "-DSQLITE_THREADSAFE=1" "-DSQLITE_USE_URI" "-DHAVE_USLEEP=1" "-D_POSIX_THREAD_SAFE_FUNCTIONS" "-DHAVE_ISNAN" "-DHAVE_LOCALTIME_R" "-o" "/home/runner/AptRecursiveCustomers/target/debug/build/libsqlite3-sys-54de960ee343dcd0/out/sqlite3/sqlite3.o" "-c" "sqlite3/sqlite3.c"
+cargo:warning=In file included from /nix/store/msy4nj4gscw9csc82labx0xvh7vqlfif-glibc-2.33-117-dev/include/bits/libc-header-start.h:33,
+cargo:warning=                 from /nix/store/msy4nj4gscw9csc82labx0xvh7vqlfif-glibc-2.33-117-dev/include/stdio.h:27,
+cargo:warning=                 from sqlite3/sqlite3.c:14010:
+cargo:warning=/nix/store/msy4nj4gscw9csc82labx0xvh7vqlfif-glibc-2.33-117-dev/include/features.h:397:4: warning: #warning _FORTIFY_SOURCE requires compiling with optimization (-O) [-Wcpp]
+cargo:warning=  397 | #  warning _FORTIFY_SOURCE requires compiling with optimization (-O)
+cargo:warning=      |    ^~~~~~~
+exit status: 0
+AR_x86_64-unknown-linux-gnu = None
+AR_x86_64_unknown_linux_gnu = None
+HOST_AR = None
+AR = Some("ar")
+running: "ar" "cq" "/home/runner/AptRecursiveCustomers/target/debug/build/libsqlite3-sys-54de960ee343dcd0/out/libsqlite3.a" "/home/runner/AptRecursiveCustomers/target/debug/build/libsqlite3-sys-54de960ee343dcd0/out/sqlite3/sqlite3.o"
+exit status: 0
+running: "ar" "s" "/home/runner/AptRecursiveCustomers/target/debug/build/libsqlite3-sys-54de960ee343dcd0/out/libsqlite3.a"
+exit status: 0
+cargo:rustc-link-lib=static=sqlite3
+cargo:rustc-link-search=native=/home/runner/AptRecursiveCustomers/target/debug/build/libsqlite3-sys-54de960ee343dcd0/out
+cargo:lib_dir=/home/runner/AptRecursiveCustomers/target/debug/build/libsqlite3-sys-54de960ee343dcd0/out
