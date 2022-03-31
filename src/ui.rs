@@ -139,6 +139,31 @@ fn update_employee_handler(conn: &Connection) {
    print!("{esc}c", esc = 27 as char);
 
   println!("UPDATE EMPLOYEE");
+  let mut name = String::new();
+  let mut first_name = String::new();
+  let mut last_name = String::new();
+  let mut dob = String::new();
+
+  print!("Select employee to be update his the first name: ");
+  io::stdout().flush().unwrap();
+  io::stdin().read_line(&mut name).ok().expect("Failed to read name");
+
+  print!("First Name: ");
+  io::stdout().flush().unwrap();
+  io::stdin().read_line(&mut first_name).ok().expect("Failed to read first name");
+
+  print!("Last Name: ");
+  io::stdout().flush().unwrap();
+  io::stdin().read_line(&mut last_name).ok().expect("Failed to read last name");
+
+  print!("Date of birth: ");
+  io::stdout().flush().unwrap();
+  io::stdin().read_line(&mut dob).ok().expect("Failed to read date of birth");
+
+  let emp_update = Employee::new(first_name, last_name, dob);
+
+  update_employee(conn, name, emp_update).expect("Failed to update the employee");
+  
 
   perform_another_operation();
 }

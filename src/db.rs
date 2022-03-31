@@ -57,8 +57,8 @@ pub fn add_employee(conn: &Connection, employee: Employee) -> Result<()>{
   Ok(())
 }
 
-pub fn update_employee(conn: &Connection,  employee: Employee) -> Result<(), String>{
-  let conn = conn.execute("UPDATE employees SET first_name = ?1, last_name = ?2, date_of_birth = ?3 WHERE name = ?4", params![employee.first_name, employee.last_name, employee.date_of_birth, employee.first_name]);
+pub fn update_employee(conn: &Connection, name: String, employee: Employee) -> Result<(), String>{
+  let conn = conn.execute("UPDATE employee SET first_name = ?1, last_name = ?2, date_of_birth = ?3 WHERE first_name = ?4", params![employee.first_name, employee.last_name, employee.date_of_birth, name]);
 
   match conn {
     Ok(0) => Err(format!("No row found for name: {}.", employee.first_name)),
