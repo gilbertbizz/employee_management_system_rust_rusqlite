@@ -57,6 +57,26 @@ pub fn add_employee(conn: &Connection, employee: Employee) -> Result<()>{
   Ok(())
 }
 
+// pub fn search_employee(conn: &Connection, name: String) -> Result<()> {
+//   let mut stmt = conn.prepare("SELECT * FROM employee WHERE first_name = ?1", params![name])?;
+//   let emp_iter = stmt.query_map([], |row| {
+//     Ok(Employee {
+//       first_name: row.get(0)?,
+//       last_name: row.get(1)?,
+//       date_of_birth: row.get(2)?,
+//     })
+//   })?;
+
+//   for emp in emp_iter {
+//     match emp {
+//       Ok(emp) => emp,
+//       Err(e) => println!("Error searching: {}", e),
+//     }
+//   }
+
+//   Ok(())
+// }
+
 pub fn update_employee(conn: &Connection, name: String, employee: Employee) -> Result<(), String>{
   let conn = conn.execute("UPDATE employee SET first_name = ?1, last_name = ?2, date_of_birth = ?3 WHERE first_name = ?4", params![employee.first_name, employee.last_name, employee.date_of_birth, name]);
 

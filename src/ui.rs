@@ -22,12 +22,13 @@ pub fn main_menu() {
 }
 
 fn menu() {
-   println!("\t\tOptions:\n");
+  println!("\t\tOptions:\n");
   println!("\t\t1. Add Employee");
   println!("\t\t2. View all Employees");
-  println!("\t\t3. Update Employee");
-  println!("\t\t4. Delete Employee");
-  println!("\t\t5. Exit");
+  println!("\t\t3. Search Employee by First Name");
+  println!("\t\t4. Update Employee");
+  println!("\t\t5. Delete Employee");
+  println!("\t\t6. Exit");
 }
 
 fn choice() {
@@ -54,9 +55,10 @@ fn choice() {
     match choice_str.trim() {
       "1" => add_employee_handler(&conn),
       "2" => view_all_employees(&conn),
-      "3" =>  update_employee_handler(&conn),
-      "4" => delete_employee_handler(&conn),
-      "5" => exit_app(),
+      "3" => search_employee_by_name(),
+      "4" =>  update_employee_handler(&conn),
+      "5" => delete_employee_handler(&conn),
+      "6" => exit_app(),
       _ => println!("No number entered"),
     }
   }
@@ -83,9 +85,9 @@ fn add_employee_handler(conn: &Connection) {
   print!("{esc}c", esc = 27 as char); // clear the console
   
   loop {
-    app_header();
+   app_header();
 
-    println!("Add Employee: ");
+   println!("Add Employee: ");
 
    let mut first_name = String::new();
    print!("First Name: ");
@@ -135,6 +137,29 @@ fn display_employees(employees: Vec<Employee>) {
   }
 }
 
+fn search_employee_by_name() {
+  // fn display_employee(employee: Employee) {
+  //   println!("- \tfirstname: \t\t{}\tlastname: \t\t{}\tdate of birth: \t{}", employee.first_name, employee.last_name, employee.date_of_birth);
+  // }
+
+  // let mut name = String::new();
+  // print!("Type the name to be searched for: ");
+  // io::stdout().flush().unwrap();
+  // io::stdin().read_line(&mut name).ok().expect("Failed to read name");
+
+  // match search_employee(&conn, name) {
+  //   Ok(emp) => display_employee(emp),
+  //   Err(e) => {
+  //     println!("An error occurred while listing all employees: \"{}\".", e);
+  //      exit(1);
+  //   }
+  // };
+
+
+  println!("SEARCH EMPLOYEE");
+  perform_another_operation();
+}
+
 fn update_employee_handler(conn: &Connection) {
    print!("{esc}c", esc = 27 as char);
 
@@ -169,7 +194,7 @@ fn update_employee_handler(conn: &Connection) {
 }
 
 fn delete_employee_handler(conn: &Connection) {
-   print!("{esc}c", esc = 27 as char);
+  print!("{esc}c", esc = 27 as char);
 
   println!("DELETE EMPLOYEE");
 
