@@ -61,7 +61,7 @@ pub fn update_employee(conn: &Connection, name: String, employee: Employee) -> R
   let conn = conn.execute("UPDATE employee SET first_name = ?1, last_name = ?2, date_of_birth = ?3 WHERE first_name = ?4", params![employee.first_name, employee.last_name, employee.date_of_birth, name]);
 
   match conn {
-    Ok(0) => Err(format!("No row found for name: {}.", employee.first_name)),
+    Ok(0) => Err(format!("No row found for name: {}.", name)),
     Err(e) => Err(format!("{}", e)),
     _ => Ok(()),
   }
@@ -69,13 +69,13 @@ pub fn update_employee(conn: &Connection, name: String, employee: Employee) -> R
 
 
 
-// pub fn delete_employee_by_id(conn: Connection, id: u32) -> Result<()> {
-//   let conn = conn.execute("DELETE FROM employees WHERE id = ?1", params![id]);
+pub fn delete_employee(conn: &Connection, name: String) -> Result<(), String> {
+  let conn = conn.execute("DELETE FROM employee WHERE first_name = ?1", params![name]);
 
-//   match conn {
-//     Ok(0) => Err(format!("No row found for id: {}.", id)),
-//     Err(e) => Err(format!("{}", e)),
-//     _ => Ok(()),
-//   }
-// }
+  match conn {
+    Ok(0) => Err(format!("No row found for name: {}.", name)),
+    Err(e) => Err(format!("{}", e)),
+    _ => Ok(()),
+  }
+}
 

@@ -4,7 +4,7 @@ use std::process::exit;
 
 use rusqlite::Connection;
 
-use crate::db::{db_init, add_employee, all_employees, update_employee };
+use crate::db::{db_init, add_employee, all_employees, update_employee, delete_employee };
 use crate::employee::Employee;
 use crate::config::DB_PATH;
 
@@ -55,7 +55,7 @@ fn choice() {
       "1" => add_employee_handler(&conn),
       "2" => view_all_employees(&conn),
       "3" =>  update_employee_handler(&conn),
-      "4" => delete_employee(),
+      "4" => delete_employee_handler(&conn),
       "5" => exit_app(),
       _ => println!("No number entered"),
     }
@@ -144,7 +144,7 @@ fn update_employee_handler(conn: &Connection) {
   let mut last_name = String::new();
   let mut dob = String::new();
 
-  print!("Select employee to be update his the first name: ");
+  print!("Select employee to be updated with the first name: ");
   io::stdout().flush().unwrap();
   io::stdin().read_line(&mut name).ok().expect("Failed to read name");
 
@@ -168,10 +168,18 @@ fn update_employee_handler(conn: &Connection) {
   perform_another_operation();
 }
 
-fn delete_employee() {
+fn delete_employee_handler(conn: &Connection) {
    print!("{esc}c", esc = 27 as char);
 
   println!("DELETE EMPLOYEE");
+
+  print!("Select employee to be deleted: ");
+  let mut name = String::new();
+
+  io::stdout().flush().unwrap();
+  io::stdin().read_line(&mut name).ok().expect("Failed to read name");
+
+  delete_employee(conn, name).expect("Failed to delete the employee");
 
   perform_another_operation();
 }
